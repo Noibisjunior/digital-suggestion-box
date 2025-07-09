@@ -4,8 +4,7 @@ import useMediaQuery from './hooks/useMediaQuery';
 // import Loading from './shared/Loading'
 import Navbar from './components/Navbar'
 import Home from './pages/home';
-
-
+import { Toaster } from 'react-hot-toast';
 
 
 const App = () => {
@@ -44,6 +43,7 @@ const App = () => {
               <div className="h-full bg-transparent ">
                 <Navbar isTopOfPage={isTopOfPage} />
                 <Home />
+                  <Toaster position="top-right" />
               </div>   
             } 
           />

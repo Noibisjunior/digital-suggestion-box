@@ -6,7 +6,7 @@ exports.submitSuggestion = async (req, res) => {
   if (!title || !description) {
     return res.status(400).json({ error: 'Title and description are required' });
   }
-
+ 
   try {
     const result = await pool.query(
       `INSERT INTO suggestions (title, description, category, is_anonymous, user_id)
