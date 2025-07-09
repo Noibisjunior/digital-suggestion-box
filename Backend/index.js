@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const suggestionRoutes = require('./routes/suggesstionRoute');
 const authRoutes = require('./routes/authRoutes');
 
+
 dotenv.config();
 const app = express();
 app.use(cors());
