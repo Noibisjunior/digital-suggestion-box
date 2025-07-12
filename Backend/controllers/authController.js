@@ -47,7 +47,14 @@ exports.loginAdmin = async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.json({ message: 'Login successful', token });
+res.cookie('token', token, {
+  httpOnly: true,
+  secure: false,             
+  sameSite: 'lax',       
+  maxAge: 2 * 60 * 60 * 1000
+});
+
+res.json({ message: 'Login successful' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Login failed' });
