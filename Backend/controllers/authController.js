@@ -4,7 +4,11 @@ const jwt = require('jsonwebtoken');
 
 
 exports.registerAdmin = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, registration_key } = req.body;
+
+  if (registration_key !== process.env.ADMIN_REGISTRATION_KEY) {
+    return res.status(403).json({ error: 'Unauthorized: Invalid registration key' });
+  }
 
   try {
     const hashed = await bcrypt.hash(password, 10);
@@ -43,7 +47,14 @@ exports.loginAdmin = async (req, res) => {
       { expiresIn: '2h' }
     );
 
-    res.json({ message: 'Login successful', token });
+res.cookie('token', token, {
+  httpOnly: true,
+  secure: false,             
+  sameSite: 'lax',       
+  maxAge: 2 * 60 * 60 * 1000
+});
+
+res.json({ message: 'Login successful' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Login failed' });

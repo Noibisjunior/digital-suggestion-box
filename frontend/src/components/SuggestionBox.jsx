@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import HText from '../shared/HText';
 import PrimaryText from '../shared/PrimaryText';
-import axios from 'axios';
+import axios from '../services/api';
 import toast from 'react-hot-toast';
 
 const Notification = ({ name }) => {
@@ -60,7 +60,7 @@ const SuggestionBox = () => {
     };
 
     try {
-      await axios.post('http://localhost:5050/api/suggestions', payload);
+      await axios.post('/suggestions', payload);
       toast.success('Suggestion submitted successfully!');
       setSubmitted(true);
       setSubmittedName(name);
