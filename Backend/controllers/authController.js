@@ -4,7 +4,11 @@ const jwt = require('jsonwebtoken');
 
 
 exports.registerAdmin = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, registration_key } = req.body;
+
+  if (registration_key !== process.env.ADMIN_REGISTRATION_KEY) {
+    return res.status(403).json({ error: 'Unauthorized: Invalid registration key' });
+  }
 
   try {
     const hashed = await bcrypt.hash(password, 10);
