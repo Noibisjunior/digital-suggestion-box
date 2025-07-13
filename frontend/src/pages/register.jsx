@@ -70,7 +70,7 @@ const Register = () => {
        <div>
   <label className="text-sm">Registration Key</label>
   <input
-    type="text"
+    type="password"
     name="registration_key"
     className="w-full border rounded px-3 py-2"
     value={formData.registration_key}
